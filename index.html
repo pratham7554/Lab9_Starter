@@ -87,6 +87,17 @@
     </section>
   </main>
 
+
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "0abb575a570c424baa9c380dd9ec09d1"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
+
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +113,105 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    errorBtns[0].addEventListener('click', function() {
+      console.log("Console Log");
+    });
+
+    errorBtns[1].addEventListener('click', function() {
+      console.error("Console Error");
+    });
+
+    errorBtns[2].addEventListener('click', function() {
+      console.count("Console Count");
+    });
+
+    errorBtns[3].addEventListener('click', function() {
+      console.warn("Console Warn");
+    });
+
+    errorBtns[4].addEventListener('click', function() {
+      let x = 3;
+      const errorMsg = 'Not equal to 5';
+      console.assert(x == 5, { x, errorMsg });
+
+      console.log("Console Log");
+    });
+
+    errorBtns[5].addEventListener('click', function() {
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener('click', function() {
+      console.dir(errorBtns[6]);
+    });
+
+    errorBtns[7].addEventListener('click', function() {
+      console.dirxml(errorBtns[7]);
+    });
+
+    errorBtns[8].addEventListener('click', function() {
+      console.group();
+    });
+
+    errorBtns[9].addEventListener('click', function() {
+      console.groupEnd();
+    });
+
+    errorBtns[10].addEventListener('click', function() {
+      var years = [{year: '2020', leap: 'yes'}, {year: '2021', leap: 'no'}, {year: '2022', leap: 'no'}];
+      console.table(years);
+    });
+
+    errorBtns[11].addEventListener('click', function() {
+      console.time("Time");
+    });
+
+    errorBtns[12].addEventListener('click', function() {
+      console.timeEnd("Time");
+    });
+
+    errorBtns[13].addEventListener('click', function() {
+      function deep() {
+        function deeper() {
+          function deepest() {
+            console.trace();
+          }
+          deepest();
+        }
+        deeper();
+      }
+      deep();
+    });
+
+    errorBtns[14].addEventListener('click', function() {
+      nonExistentFunc();
+    });
+
+    class myErrorType extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "myError";
+      }
+    }
+
+    let calculate = document.getElementById("calculate");
+    calculate.addEventListener("click", function() {
+      try {
+        let firstNum = document.querySelector("#first-num").value;
+        let secondNum = document.querySelector("#second-num").value;
+        if ((isNaN(firstNum)) || (isNaN(secondNum))) {
+          console.log("Error took place");
+          throw new myErrorType("Error took place");
+        }
+      } catch (err) {
+        console.log("Error");
+        alert(err.name);
+      } finally {
+        console.log("Finally section executed");
+      }
+    });
+
+
   </script>
 </body>
 
